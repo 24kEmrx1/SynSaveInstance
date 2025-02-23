@@ -1,5 +1,5 @@
 local Params = {
- RepoURL = "https://raw.githubusercontent.com/24kEmrx1/SynSaveInstance/refs/heads/Params",
+ RepoURL = "https://raw.githubusercontent.com/24kEmrx1/SynSaveInstance/refs/heads/Params/",
  SSI = "RepoURL",
 }
 local synsaveinstance = loadstring(game:HttpGet(Params.RepoURL .. Params.SSI , true), Params.SSI)()
