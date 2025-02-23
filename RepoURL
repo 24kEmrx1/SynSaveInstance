@@ -2775,7 +2775,7 @@ local function synsaveinstance(CustomOptions, CustomOptions2)
 												and instance:IsA("Script")
 												and instance.RunContext ~= Enum.RunContext.Client
 											then
-												value = "-- [FilteringEnabled] Server Scripts are IMPOSSIBLE to save" -- TODO: Could be not just server scripts in the future
+												value = "-- [FilteringEnabled] Server Script'leri kaymetmek IMKANSIZ'dır" -- TODO: Could be not just server scripts in the future
 											else
 												value = ldecompile(instance)
 												if SaveBytecode then
@@ -2787,8 +2787,8 @@ local function synsaveinstance(CustomOptions, CustomOptions2)
 											end
 										end
 
-										value = "-- Saved by UniversalSynSaveInstance (Join to Copy Games) https://discord.gg/wx4ThpAsmw\n\n"
-											.. (hasLinkedSource and "-- Original Source: https://assetdelivery.roblox.com/v1/asset/?" .. (LinkedSource_type or "id") .. "=" .. (LinkedSource or LinkedSource_Url) .. "\n\n" or "")
+										value = "-- Eecy's SaveInstance Tarafından Kaydedilmiştir"
+											.. (hasLinkedSource and "-- Orijinal Kaynak: https://assetdelivery.roblox.com/v1/asset/?" .. (LinkedSource_type or "id") .. "=" .. (LinkedSource or LinkedSource_Url) .. "\n\n" or "")
 											.. value
 									end
 								end
@@ -2952,39 +2952,42 @@ local function synsaveinstance(CustomOptions, CustomOptions2)
 						RecoveredScripts
 						) .. "\n" or "")
 					.. [[
-		Thank you for using Eecy's SaveInstance.
+		"Eecy's SaveInstance'i kullandığınız için teşekkürler.
 
-		If you didn't save in Binary (rbxl) - it's recommended to save the game right away to take advantage of the binary format & to preserve values of certain properties if you used IgnoreDefaultProperties setting (as they might change in the future).
-		You can do that by going to FILE -> Save to File As -> Make sure File Name ends with .rbxl -> Save
+		Eğer oyunu İkili (Binary) formatta (rbxl) kaydetmediyseniz, hemen kaydetmeniz önerilir. Bu, ikili formatın avantajlarından yararlanmanızı ve IgnoreDefaultProperties ayarını kullandıysanız belirli özellik değerlerini korumanızı sağlar (çünkü bu değerler gelecekte değişebilir).
+		Bunu yapmak için şu adımları izleyin: DOSYA -> Farklı Kaydet -> Dosya adının .rbxl ile bittiğinden emin olun -> Kaydedin.
 
-		ServerStorage, ServerScriptService and Server Scripts are IMPOSSIBLE to save because of FilteringEnabled.
+		ServerStorage, ServerScriptService ve Server Script'ler FilteringEnabled nedeniyle kaydedilemez.
 
-		If your player cannot spawn into the game, please move the scripts in StarterPlayer somewhere else. Then run `game:GetService("Players").CharacterAutoLoads = true`.
-		And use "Play Here" to start game instead of "Play" to spawn your Character where your Camera currently is.
+		Eğer oyuncunuz oyuna doğamıyorsa, StarterPlayer içindeki scriptleri başka bir yere taşıyın.
+		Ardından şu komutu çalıştırın: game:GetService("Players").CharacterAutoLoads = true
+		Ve karakterinizi şu anki kamera konumunda doğurmak için "Play" yerine "Play Here" seçeneğini kullanın.
 
-		If the chat system does not work, please use the explorer and delete everything inside the TextChatService/Chat service(s). 
-		Or run `game:GetService("Chat"):ClearAllChildren() game:GetService("TextChatService"):ClearAllChildren()`
-				
-		If Union and MeshPart collisions don't work, run the script below in the Studio Command Bar:
-				
-				
+		Eğer sohbet sistemi çalışmıyorsa, Explorer’ı açıp TextChatService/Chat içindeki her şeyi silin.
+		Veya aşağıdaki komutu çalıştırın:
+
+		game:GetService("Chat"):ClearAllChildren()
+		game:GetService("TextChatService"):ClearAllChildren()
+
+		Eğer Union ve MeshPart çarpışmaları çalışmıyorsa, aşağıdaki scripti Studio Komut Çubuğunda çalıştırın:
+
 		local C = game:GetService("CoreGui")
 		local D = Enum.CollisionFidelity.Default
-				
-		for _, v in game:GetDescendants() do
-			if v:IsA("TriangleMeshPart") and not v:IsDescendantOf(C) then
-				v.CollisionFidelity = D
-			end
-		end
-		print("Done")
-				
-		If you can't move the Camera, run this script in the Studio Command Bar:
-			
-		workspace.CurrentCamera.CameraType = Enum.CameraType.Fixed
-		
-		Or Destroy the Camera.
 
-		This file was generated with the following settings:
+		for _, v in game:GetDescendants() do
+    		if v:IsA("TriangleMeshPart") and not v:IsDescendantOf(C) then
+  		      v.CollisionFidelity = D
+  		  end
+		end
+		print("Tamamlandı")
+
+		Eğer kamerayı hareket ettiremiyorsanız, şu komutu Studio Komut Çubuğunda çalıştırın:
+
+		workspace.CurrentCamera.CameraType = Enum.CameraType.Fixed
+
+		Veya Kamerayı silin.
+
+		Bu dosya, aşağıdaki ayarlarla oluşturulmuştur:"
 		]]
 					.. service.HttpService:JSONEncode(OPTIONS)
 					.. "\n\n\t\tElapsed time: "
@@ -3193,7 +3196,7 @@ local function synsaveinstance(CustomOptions, CustomOptions2)
 		end)
 
 		StatusText = Instance.new("TextLabel")
-		
+
 		StatusText.Text = [[Eecy's SaveInstance | <font color="rgb(255,0,127)">Kaydediliyor...</font>]]
 
 		StatusText.BackgroundTransparency = 1
