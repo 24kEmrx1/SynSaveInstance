@@ -2458,7 +2458,7 @@ local function synsaveinstance(CustomOptions, CustomOptions2)
 		end
 
 		if StatusText then
-			StatusText.Text = "Saving.. Size: " .. get_size_format()
+			StatusText.Text = "Kaydediliyor.. Büyüklük: " .. [[<font color="rgb(255,0,127)">]] .. get_size_format() .. [[</font>]]
 		end
 		-- ? Needed for at least 1fps (status text)
 		-- task.wait()
@@ -3226,7 +3226,7 @@ local function synsaveinstance(CustomOptions, CustomOptions2)
 		StatusText.Font = "MontserratBlack"
 		StatusText.AnchorPoint = Vector2.new(1,1)
 		StatusText.Position = UDim2.new(0.99,0,0.99,0)
-		StatusText.Size = UDim2.new(0.3, 0, 0, 20)
+		StatusText.Size = UDim2.new(0.5, 0, 0, 20)
 		StatusText.RichText = true
 
 		StatusText.TextColor3 = Color3.new(1, 1, 1)
