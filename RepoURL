@@ -2944,50 +2944,73 @@ local function synsaveinstance(CustomOptions, CustomOptions2)
 
 		if OPTIONS.ReadMe then
 			save_extra(
-				"README",
+				"{ OKU BENI }",
 				nil,
-				"Script",
+				"ModuleScript",
 				"--[[\n"
 					.. (#RecoveredScripts ~= 0 and "\t\tIMPORTANT: Original Source of these Scripts was Recovered: " .. service.HttpService:JSONEncode(
 						RecoveredScripts
 						) .. "\n" or "")
 					.. [[
 		"Eecy's SaveInstance'i kullandığınız için teşekkürler.
+		------------------------------------------------------
+		Eecy's SaveInstance Kullanımı Hakkında Öneriler ve Rehber
 
-		Eğer oyunu İkili (Binary) formatta (rbxl) kaydetmediyseniz, hemen kaydetmeniz önerilir. Bu, ikili formatın avantajlarından yararlanmanızı ve IgnoreDefaultProperties ayarını kullandıysanız belirli özellik değerlerini korumanızı sağlar (çünkü bu değerler gelecekte değişebilir).
-		Bunu yapmak için şu adımları izleyin: DOSYA -> Farklı Kaydet -> Dosya adının .rbxl ile bittiğinden emin olun -> Kaydedin.
+		Öncelikle Eecy's SaveInstance fonksiyonunu kullandığınız için teşekkür ederiz! Bu araç, oyun geliştirme sürecinde işinizi kolaylaştırmak amacıyla tasarlanmıştır. Ancak bazı durumlarda, oyun dosyanızın düzgün çalışması ve en verimli şekilde kaydedilmesi için bazı ek önlemler almanız gerekebilir. İşte size yardımcı olabilecek bazı öneriler:
 
-		ServerStorage, ServerScriptService ve Server Script'ler FilteringEnabled nedeniyle kaydedilemez.
+		1. İkili (Binary) Formatta Kaydetme
+		Eğer oyununuzu rbxl formatında kaydetmediyseniz, hemen kaydetmeniz çok önemlidir. İkili format, oyun verilerinin daha verimli bir şekilde depolanmasını sağlar ve oyun daha hızlı yüklenir. Ayrıca, bazı özel özelliklerin korunabilmesi için bu format gereklidir. Özellikle, belirli özellik değerlerinin korunması gerektiğinde (örneğin, IgnoreDefaultProperties kullanıldığında), bu format sayesinde verileriniz kaybolmaz. Bu nedenle, oyun dosyanızın her zaman ikili formatta (rbxl) kaydedildiğinden emin olun.
 
-		Eğer oyuncunuz oyuna doğamıyorsa, StarterPlayer içindeki scriptleri başka bir yere taşıyın.
-		Ardından şu komutu çalıştırın: game:GetService("Players").CharacterAutoLoads = true
-		Ve karakterinizi şu anki kamera konumunda doğurmak için "Play" yerine "Play Here" seçeneğini kullanın.
+		Bunu yapmak için:
 
-		Eğer sohbet sistemi çalışmıyorsa, Explorer’ı açıp TextChatService/Chat içindeki her şeyi silin.
-		Veya aşağıdaki komutu çalıştırın:
+		. Dosya menüsüne gidin.
+		. Farklı Kaydet seçeneğine tıklayın.
+		. Dosya adınızın .rbxl ile bittiğinden emin olun.
+		. Dosyanızı kaydedin.
+		
+		2. ServerStorage ve ServerScriptService Sorunları
+		FilteringEnabled özelliği nedeniyle ServerStorage, ServerScriptService ve Server Script öğeleri kaydedilemez. Bu, verilerin doğru şekilde saklanmasını engelleyebilir. Eğer oyuncular oyununuzda düzgün bir şekilde yer alamıyorsa, bu durumda StarterPlayer içindeki betikleri başka bir yere taşımanız gerekebilir. Ayrıca, CharacterAutoLoads özelliğini aktif hale getirmeniz de çözüm olabilir.
 
-		game:GetService("Chat"):ClearAllChildren()
-		game:GetService("TextChatService"):ClearAllChildren()
+		Bu durumu çözmek için:
 
-		Eğer Union ve MeshPart çarpışmaları çalışmıyorsa, aşağıdaki scripti Studio Komut Çubuğunda çalıştırın:
+		. StarterPlayer içindeki scriptleri başka bir yere taşıyın.
+		. game:GetService("Players").CharacterAutoLoads = true komutunu çalıştırın.
+		. Karakteri doğru şekilde yerleştirmek için Play Here seçeneğini kullanın.
+		
+		3. Sohbet Sistemi Sorunları
+		Eğer sohbet sistemi doğru şekilde çalışmıyorsa, Explorer penceresini açarak TextChatService ve Chat altındaki her şeyi silebilirsiniz. Alternatif olarak, sohbet verilerini temizlemek için aşağıdaki komutları çalıştırabilirsiniz:
 
+		. game:GetService("Chat"):ClearAllChildren()
+		. game:GetService("TextChatService"):ClearAllChildren()
+		
+		Bu, sohbet sistemiyle ilgili tüm mevcut sorunları çözmeye yardımcı olacaktır.
+
+		4. Union ve MeshPart Çarpışması
+		Eğer Union ve MeshPart çarpışmaları doğru çalışmıyorsa, çarpışma özelliklerini yeniden yapılandırmak gerekebilir. Bunun için, CoreGui dışında kalan tüm TriangleMeshPart öğelerinin çarpışma özelliklerini tekrar ayarlamanız gerekecek.
+
+		Bunu yapmak için şu komutu çalıştırabilirsiniz:
+		
 		local C = game:GetService("CoreGui")
 		local D = Enum.CollisionFidelity.Default
-
-		for _, v in game:GetDescendants() do
-    		if v:IsA("TriangleMeshPart") and not v:IsDescendantOf(C) then
-  		      v.CollisionFidelity = D
-  		  end
+		
+		for _, v in game:GetDescendants() do 
+			if v:IsA("TriangleMeshPart") and not v:IsDescendantOf(C) then
+				v.CollisionFidelity = D 
+			end
 		end
-		print("Tamamlandı")
 
-		Eğer kamerayı hareket ettiremiyorsanız, şu komutu Studio Komut Çubuğunda çalıştırın:
+		Bu, tüm çarpışma hatalarını gidermeye yardımcı olacaktır.
+
+		5. Kamera Sorunları
+		Eğer kameranızı hareket ettiremiyorsanız, şu komutları kullanarak kamerayı yeniden yapılandırabilirsiniz:
 
 		workspace.CurrentCamera.CameraType = Enum.CameraType.Fixed
 
-		Veya Kamerayı silin.
+		Alternatif olarak, kamerayı tamamen kaldırıp yenisini eklemeyi de deneyebilirsiniz. Bu, kamera ile ilgili tüm olası hataları düzeltecektir.
 
-		Bu dosya, aşağıdaki ayarlarla oluşturulmuştur:"
+		Bu öneriler, oyununuzun düzgün çalışmasını sağlamak için bazı yaygın sorunları çözmenize yardımcı olacaktır. Eğer başka sorunlarla karşılaşırsanız; DC: eecy__"
+		--------------------------------------------------------------------------------------------------------------------------------------------------------------
+		Bu dosya, aşağıdaki ayarlarla oluşturulmuştur:
 		]]
 					.. service.HttpService:JSONEncode(OPTIONS)
 					.. "\n\n\t\tElapsed time: "
