@@ -56,15 +56,13 @@ local identify_executor = identifyexecutor or getexecutorname or whatexecutor
 
 local EXECUTOR_NAME = identify_executor and identify_executor() or ""
 
--- local cloneref = global_container.cloneref
 local gethiddenproperty = global_container.gethiddenproperty
 
--- These should be universal enough
 local appendfile = appendfile
 local readfile = readfile
 local writefile = writefile
 
-local getscriptbytecode = global_container.getscriptbytecode -- * A lot of assumptions are made based on whether this function is defined or not. So in certain edge cases, like if the executor defines "decompile" or "getscripthash" function yet doesn't define this function there might be loss of functionality of the saveinstance. Although that would be very rare and weird
+local getscriptbytecode = global_container.getscriptbytecode
 local base64encode = global_container.base64encode
 local sha384
 
@@ -86,7 +84,7 @@ local service = setmetatable({}, {
 })
 
 local gethiddenproperty_fallback
-do -- * Load Region of Déjà Vu
+do
 	local UGCValidationService = service.UGCValidationService
 
 	gethiddenproperty_fallback = function(instance, propertyName)
@@ -221,9 +219,6 @@ end
 
 local custom_decompiler
 
--- if getscriptbytecode then
--- end
-
 local SharedStrings = {}
 local SharedString_identifiers = setmetatable({
 	identifier = 1e15, -- 1 quadrillion, up to 9.(9) quadrillion, in theory this shouldn't ever run out and be enough for all sharedstrings ever imaginable
@@ -238,7 +233,7 @@ local SharedString_identifiers = setmetatable({
 	end,
 })
 
-local function __BIT(...) -- * Credits to Friend (you know yourself)
+local function __BIT(...)
 	local Value = 0
 
 	for i, bit in { ... } do
@@ -2787,8 +2782,8 @@ local function synsaveinstance(CustomOptions, CustomOptions2)
 											end
 										end
 
-										value = "-- Eecy's SaveInstance Tarafından Kaydedilmiştir"
-											.. (hasLinkedSource and "-- Orijinal Kaynak: https://assetdelivery.roblox.com/v1/asset/?" .. (LinkedSource_type or "id") .. "=" .. (LinkedSource or LinkedSource_Url) .. "\n\n" or "")
+										value = "-- Saved By Eecy's SaveInstance"
+											.. (hasLinkedSource and "-- Original Source: https://assetdelivery.roblox.com/v1/asset/?" .. (LinkedSource_type or "id") .. "=" .. (LinkedSource or LinkedSource_Url) .. "\n\n" or "")
 											.. value
 									end
 								end
@@ -2947,7 +2942,7 @@ local function synsaveinstance(CustomOptions, CustomOptions2)
 				"{ OKU BENI }",
 				nil,
 				"ModuleScript",
-				"--[[\n"
+				"return [[\n"
 					.. (#RecoveredScripts ~= 0 and "\t\tIMPORTANT: Original Source of these Scripts was Recovered: " .. service.HttpService:JSONEncode(
 						RecoveredScripts
 						) .. "\n" or "")
