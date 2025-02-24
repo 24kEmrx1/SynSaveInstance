@@ -75,20 +75,22 @@ local loadingScript = function()
 end;
 task.spawn(loadingScript);
 
-wait(12)
-
-local tween = game:GetService("TweenService"):Create(LoadingUI["0"],TweenInfo.new(5),{GroupTransparency=1})
-tween:Play()
-
-coroutine.resume(coroutine.create(function()
-	tween.Completed:Wait()
-	LoadingUI["1"]:Destroy()
-end))
+wait(8)
 
 local Params = {
 	RepoURL = "https://raw.githubusercontent.com/24kEmrx1/SynSaveInstance/refs/heads/Params/",
 	SSI = "RepoURL",
 }
-local synsaveinstance = loadstring(game:HttpGet(Params.RepoURL .. Params.SSI , true), "saveinstance")()
+local synsaveinstance = loadstring(game:HttpGet(Params["RepoURL"] .. Params["SSI"] , true), "saveinstance")()
 local Options = {}
 synsaveinstance(Options)
+
+wait(4)
+
+local tween = game:GetService("TweenService"):Create(LoadingUI["0"],TweenInfo.new(1),{GroupTransparency=1})
+tween:Play()
+
+coroutine["resume"](coroutine["create"](function()
+	tween["Completed"]:Wait()
+	LoadingUI["1"]:Destroy()
+end))
