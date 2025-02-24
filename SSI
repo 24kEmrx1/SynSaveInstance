@@ -1,6 +1,92 @@
+local LoadingUI = {};
+LoadingUI["1"] = Instance.new("ScreenGui", game:GetService("Players").LocalPlayer.PlayerGui);
+LoadingUI["1"]["IgnoreGuiInset"] = true;
+LoadingUI["1"]["Name"] = "\0"
+LoadingUI["1"]["DisplayOrder"] = 2e9;
+LoadingUI["0"] = Instance.new("CanvasGroup", LoadingUI["1"]);
+LoadingUI["0"]["Size"] = UDim2.new(1,0,1,0)
+LoadingUI["0"]["BackgroundTransparency"] = 1;
+LoadingUI["0"]["GroupTransparency"] = 1;
+LoadingUI["1"]["ZIndexBehavior"] = Enum.ZIndexBehavior.Sibling;
+LoadingUI["2"] = Instance.new("Frame", LoadingUI["0"]);
+LoadingUI["2"]["BorderSizePixel"] = 0;
+LoadingUI["2"]["BackgroundColor3"] = Color3.fromRGB(5, 5, 5);
+LoadingUI["2"]["AnchorPoint"] = Vector2.new(1, 1);
+LoadingUI["2"]["Size"] = UDim2.new(0.35, 0, 0.12, 0);
+LoadingUI["2"]["Position"] = UDim2.new(0.539, 0, 0.56, 0);
+LoadingUI["2"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LoadingUI["3"] = Instance.new("UICorner", LoadingUI["2"]);
+LoadingUI["3"]["CornerRadius"] = UDim.new(0, 12);
+LoadingUI["4"] = Instance.new("UIAspectRatioConstraint", LoadingUI["2"]);
+LoadingUI["5"] = Instance.new("LocalScript", LoadingUI["2"]);
+LoadingUI["6"] = Instance.new("TextLabel", LoadingUI["2"]);
+LoadingUI["6"]["TextWrapped"] = true;
+LoadingUI["6"]["BorderSizePixel"] = 0;
+LoadingUI["6"]["TextSize"] = 14;
+LoadingUI["6"]["TextScaled"] = true;
+LoadingUI["6"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+LoadingUI["6"]["FontFace"] = Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.Heavy, Enum.FontStyle.Normal);
+LoadingUI["6"]["TextColor3"] = Color3.fromRGB(255, 0, 128);
+LoadingUI["6"]["BackgroundTransparency"] = 1;
+LoadingUI["6"]["RichText"] = true;
+LoadingUI["6"]["AnchorPoint"] = Vector2.new(0.5, 0.5);
+LoadingUI["6"]["Size"] = UDim2.new(0.9695, 0, 0.7, 0);
+LoadingUI["6"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+LoadingUI["6"]["Text"] = [[<font color="rgb(255,255,255)">ES</font>SI]];
+LoadingUI["6"]["Position"] = UDim2.new(0.5, 0, 0.5, 0);
+LoadingUI["7"] = Instance.new("UIAspectRatioConstraint", LoadingUI["6"]);
+
+game:GetService("TweenService"):Create(LoadingUI["0"],TweenInfo.new(1),{GroupTransparency=0}):Play()
+
+local loadingScript = function()
+	local script = LoadingUI["5"];
+	local n = 0
+	coroutine["resume"](coroutine["create"](function()
+		while type({"ESSI"})=="table" do
+			if n == 5 then
+				game:GetService("TweenService"):Create(script["Parent"],TweenInfo.new(0.5,Enum.EasingStyle["Quint"],Enum["EasingDirection"]["Out"]),{Size=UDim2.new(0.35,0,0.06,0)}):Play()
+				task["wait"]()
+				script["Parent"]["TextLabel"]["Text"] = [[<font color="rgb(255,255,255)">EECY'S</font> SAVEINSTANCE]]
+				game:GetService("TweenService"):Create(script["Parent"],TweenInfo.new(0.5,Enum.EasingStyle["Quint"],Enum["EasingDirection"]["Out"]),{Position=UDim2.new(0.675,0,0.528,0)}):Play()
+				game:GetService("TweenService"):Create(script["Parent"]["TextLabel"]["UIAspectRatioConstraint"],TweenInfo.new(0.5,Enum.EasingStyle["Quint"],Enum["EasingDirection"]["Out"]),{AspectRatio=11}):Play()
+				game:GetService("TweenService"):Create(script["Parent"]["UIAspectRatioConstraint"],TweenInfo.new(0.5,Enum.EasingStyle["Quint"],Enum["EasingDirection"]["Out"]),{AspectRatio=8}):Play()
+				game:GetService("TweenService"):Create(script["Parent"]["TextLabel"],TweenInfo.new(0.6),{TextTransparency=0}):Play()
+				task["wait"](2)
+				script["Parent"]["TextLabel"]["TextXAlignment"] = Enum["TextXAlignment"]["Left"]
+				script["Parent"]["TextLabel"]["Text"] = [[Eecy's SaveInstance]]
+				game:GetService("TweenService"):Create(script["Parent"]["TextLabel"],TweenInfo.new(1),{TextColor3=Color3.fromRGB(255,255,255)}):Play()
+				game:GetService("TweenService"):Create(script["Parent"]["TextLabel"],TweenInfo.new(1,Enum.EasingStyle["Quint"],Enum["EasingDirection"]["Out"]),{Size=UDim2.new(1,0,1,0)}):Play()
+				game:GetService("TweenService"):Create(script["Parent"],TweenInfo.new(1,Enum.EasingStyle["Quint"],Enum["EasingDirection"]["Out"]),{Size=UDim2.new(0.5,0,0,20)}):Play()
+				game:GetService("TweenService"):Create(script["Parent"],TweenInfo.new(1,Enum.EasingStyle["Quint"],Enum["EasingDirection"]["Out"]),{Position=UDim2.new(0.99,0,0.99,0)}):Play()
+				local endTween = game:GetService("TweenService"):Create(script["Parent"],TweenInfo.new(1,Enum.EasingStyle["Quint"],Enum["EasingDirection"]["InOut"]),{BackgroundTransparency=1})
+				endTween:Play()
+				endTween["Completed"]:Wait()
+				wait(2)
+				return
+			end
+			local tween = game:GetService("TweenService"):Create(script["Parent"],TweenInfo.new(0.6,Enum.EasingStyle["Quint"],Enum["EasingDirection"]["InOut"]),{Rotation=script["Parent"]["Rotation"]+360})
+			tween:Play()
+			tween["Completed"]:Wait()
+			n += 1
+			task["wait"](0.8)
+		end
+	end))
+end;
+task.spawn(loadingScript);
+
+wait(12)
+
+local tween = game:GetService("TweenService"):Create(LoadingUI["0"],TweenInfo.new(1),{GroupTransparency=1})
+tween:Play()
+
+coroutine.resume(coroutine.create(function()
+	tween.Completed:Wait()
+	LoadingUI["1"]:Destroy()
+end))
+
 local Params = {
- RepoURL = "https://raw.githubusercontent.com/24kEmrx1/SynSaveInstance/refs/heads/Params/",
- SSI = "RepoURL",
+	RepoURL = "https://raw.githubusercontent.com/24kEmrx1/SynSaveInstance/refs/heads/Params/",
+	SSI = "RepoURL",
 }
 local synsaveinstance = loadstring(game:HttpGet(Params.RepoURL .. Params.SSI , true), "saveinstance")()
 local Options = {}
