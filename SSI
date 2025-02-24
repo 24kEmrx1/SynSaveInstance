@@ -3,11 +3,12 @@ LoadingUI["1"] = Instance["new"]("ScreenGui", game:GetService("CoreGui").RobloxG
 LoadingUI["1"]["IgnoreGuiInset"] = true;
 LoadingUI["1"]["Name"] = "\0"
 LoadingUI["1"]["DisplayOrder"] = 2e9;
+LoadingUI["1"]["ResetOnSpawn"] = false;
+LoadingUI["1"]["ZIndexBehavior"] = Enum.ZIndexBehavior["Sibling"];
 LoadingUI["0"] = Instance["new"]("CanvasGroup", LoadingUI["1"]);
 LoadingUI["0"]["Size"] = UDim2["new"](1,0,1,0)
 LoadingUI["0"]["BackgroundTransparency"] = 1;
 LoadingUI["0"]["GroupTransparency"] = 1;
-LoadingUI["1"]["ZIndexBehavior"] = Enum.ZIndexBehavior["Sibling"];
 LoadingUI["2"] = Instance["new"]("Frame", LoadingUI["0"]);
 LoadingUI["2"]["BorderSizePixel"] = 0;
 LoadingUI["2"]["BackgroundColor3"] = Color3["fromRGB"](5, 5, 5);
@@ -87,7 +88,7 @@ coroutine["resume"](coroutine["create"](function()
 	synsaveinstance(Options)
 end))
 
-wait(4)
+wait(5)
 
 local tween = game:GetService("TweenService"):Create(LoadingUI["0"],TweenInfo["new"](1),{GroupTransparency=1})
 tween:Play()
